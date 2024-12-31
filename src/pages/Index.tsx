@@ -17,7 +17,7 @@ const Index = () => {
               transition={{ duration: 0.5 }}
             >
               <img
-                src="/lovable-uploads/6ed83d42-8de4-4b59-9de2-acf44d85d469.png"
+                src="/lovable-uploads/123.png"
                 alt="NomadNet Logo"
                 className="h-8"
               />
