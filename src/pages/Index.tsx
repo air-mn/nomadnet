@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -152,13 +153,13 @@ const Index = () => {
         <div className="container text-center">
           <p className="mb-4">© 2024 NomadNet. All Rights Reserved.</p>
           <div className="flex justify-center gap-4">
-            <a href="#" className="hover:text-[#9b87f5] transition-colors">
+            <Link to="/privacy-policy" className="hover:text-[#9b87f5] transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span>|</span>
-            <a href="#" className="hover:text-[#9b87f5] transition-colors">
+            <Link to="/terms-of-service" className="hover:text-[#9b87f5] transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
