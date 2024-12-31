@@ -1,157 +1,119 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, MapPin, Star, Users } from "lucide-react";
+import { Shield, Zap, Lock, Smartphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll(".animate-on-scroll");
-      elements.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const isVisible = rect.top <= window.innerHeight * 0.75;
-        if (isVisible) {
-          el.classList.add("animate-fade-up");
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#1A1F2C]">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1"
-            alt="Nomad background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-        
+      <section className="relative min-h-screen flex items-center justify-center py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C] via-[#1A1F2C]/95 to-[#1A1F2C]" />
         <div className="container relative z-10 text-white text-center">
-          <motion.h1 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="space-y-6"
           >
-            Discover Mongolia
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8"
-          >
-            Experience the authentic nomadic lifestyle
-          </motion.p>
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-primary px-8 py-3 rounded-full text-white font-semibold flex items-center gap-2 mx-auto hover:bg-primary/90 transition-colors"
-          >
-            Start Your Journey <ChevronRight className="w-5 h-5" />
-          </motion.button>
+            <img
+              src="/lovable-uploads/6ed83d42-8de4-4b59-9de2-acf44d85d469.png"
+              alt="NomadNet Logo"
+              className="h-24 mx-auto mb-8"
+            />
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+              Stay Connected to Mongolia, Wherever You Are!
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+              NomadNet - The Secure, Fast, and Reliable VPN for Foreign Mongolians
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Button
+                size="lg"
+                className="bg-[#9b87f5] hover:bg-[#8B5CF6] text-white px-8"
+              >
+                Download for iOS
+              </Button>
+              <Button
+                size="lg"
+                className="bg-[#9b87f5] hover:bg-[#8B5CF6] text-white px-8"
+              >
+                Download for Android
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-[#1A1F2C]/50">
         <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-on-scroll">Why Choose Us</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
+          >
+            Why Choose NomadNet?
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: MapPin,
-                title: "Unique Destinations",
-                description: "Explore hidden gems and authentic experiences across Mongolia",
+                icon: Shield,
+                title: "Secure Access",
+                description:
+                  "Seamlessly access Mongolian government services, banking, and local content.",
               },
               {
-                icon: Users,
-                title: "Local Guides",
-                description: "Travel with experienced nomadic guides who know the land",
+                icon: Zap,
+                title: "Fast Speeds",
+                description:
+                  "Optimized servers ensure low latency and high-speed browsing.",
               },
               {
-                icon: Star,
-                title: "Premium Service",
-                description: "Enjoy comfortable accommodations and personalized attention",
+                icon: Lock,
+                title: "Privacy First",
+                description:
+                  "No-logs policy and end-to-end encryption for your peace of mind.",
+              },
+              {
+                icon: Smartphone,
+                title: "Easy Setup",
+                description: "One-tap connection for all your devices.",
               },
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#2A2F3C] p-6 rounded-xl hover:bg-[#2A2F3C]/80 transition-colors"
               >
-                <feature.icon className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <feature.icon className="w-12 h-12 text-[#9b87f5] mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Popular Tours Section */}
-      <section className="py-20">
-        <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-on-scroll">Popular Tours</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Gobi Desert Adventure",
-                image: "https://images.unsplash.com/photo-1509233725247-49e657c54213",
-                price: "$999",
-                duration: "6 days",
-              },
-              {
-                title: "Nomadic Life Experience",
-                image: "https://images.unsplash.com/photo-1541256942802-5f06c8f9d146",
-                price: "$799",
-                duration: "4 days",
-              },
-              {
-                title: "Horse Riding Trek",
-                image: "https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6",
-                price: "$1299",
-                duration: "8 days",
-              },
-            ].map((tour, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="group relative overflow-hidden rounded-2xl"
-              >
-                <div className="aspect-w-3 aspect-h-2">
-                  <img
-                    src={tour.image}
-                    alt={tour.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">{tour.title}</h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xl font-semibold">{tour.price}</span>
-                    <span className="text-sm">{tour.duration}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+      {/* Footer */}
+      <footer className="py-8 bg-[#1A1F2C] text-gray-300">
+        <div className="container text-center">
+          <p className="mb-4">© 2024 NomadNet. All Rights Reserved.</p>
+          <div className="flex justify-center gap-4">
+            <a href="#" className="hover:text-[#9b87f5] transition-colors">
+              Privacy Policy
+            </a>
+            <span>|</span>
+            <a href="#" className="hover:text-[#9b87f5] transition-colors">
+              Terms of Service
+            </a>
           </div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 };
