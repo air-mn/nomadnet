@@ -5,8 +5,61 @@ import { Button } from "@/components/ui/button";
 const Index = () => {
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center py-20">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1A1F2C]/95 backdrop-blur-sm border-b border-gray-800">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
+                src="/lovable-uploads/6ed83d42-8de4-4b59-9de2-acf44d85d469.png"
+                alt="NomadNet Logo"
+                className="h-8"
+              />
+            </motion.div>
+
+            {/* Navigation Links */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="hidden md:flex items-center space-x-8"
+            >
+              <a
+                href="#features"
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                Features
+              </a>
+              <a
+                href="#how-it-works"
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                How It Works
+              </a>
+              <a
+                href="#pricing"
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                Pricing
+              </a>
+              <a
+                href="#download"
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                Download
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section with adjusted padding for fixed nav */}
+      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1F2C] via-[#1A1F2C]/95 to-[#1A1F2C]" />
         <div className="container relative z-10 text-white text-center">
           <motion.div
@@ -15,11 +68,6 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <img
-              src="/lovable-uploads/6ed83d42-8de4-4b59-9de2-acf44d85d469.png"
-              alt="NomadNet Logo"
-              className="h-24 mx-auto mb-8"
-            />
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               Stay Connected to Mongolia, Wherever You Are!
             </h1>
