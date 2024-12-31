@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0c0444] backdrop-blur-sm border-b border-[#0c0444]/30">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1F2937] backdrop-blur-sm border-b border-[#1F2937]/30">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -32,25 +32,25 @@ const Index = () => {
             >
               <a
                 href="#features"
-                className="text-white hover:text-gray-200 transition-colors duration-200"
+                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
               >
                 Features
               </a>
               <a
                 href="#how-it-works"
-                className="text-white hover:text-gray-200 transition-colors duration-200"
+                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
               >
                 How It Works
               </a>
               <a
                 href="#pricing"
-                className="text-white hover:text-gray-200 transition-colors duration-200"
+                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
               >
                 Pricing
               </a>
               <a
                 href="#download"
-                className="text-white hover:text-gray-200 transition-colors duration-200"
+                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
               >
                 Download
               </a>
