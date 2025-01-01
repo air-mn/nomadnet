@@ -1,32 +1,28 @@
 import { useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, CreditCard } from "lucide-react";
+import { Eye, CreditCard, QrCode, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const Payment = () => {
   const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
-  const plan = searchParams.get("plan") || "standard";
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "qpay">("card");
+  const navigate = useNavigate();
   const duration = searchParams.get("duration") || "monthly";
 
   const getPlanPrice = () => {
-    // This is a simplified version. In a real app, you'd want to get these from a central source
     const prices = {
-      standard: {
-        monthly: 12.95,
-        "1-year": 3.99,
-        "2-year": 2.14,
-        "5-year": 1.99
-      }
+      monthly: 12.95,
+      yearly: 7.77
     };
-    return prices.standard[duration as keyof typeof prices.standard] || 12.95;
+    return prices[duration as keyof typeof prices];
   };
 
   const calculateTotal = () => {
     const basePrice = getPlanPrice();
-    const months = duration === "monthly" ? 1 : duration === "1-year" ? 12 : 24;
+    const months = duration === "monthly" ? 1 : 12;
     return (basePrice * months).toFixed(2);
   };
 
@@ -36,8 +32,17 @@ const Payment = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8"
+          className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 relative"
         >
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute -top-10 left-0 text-white hover:text-gray-300"
+            onClick={() => navigate(-1)}
+          >
+            <X className="h-6 w-6" />
+          </Button>
+
           {/* Left Column - Account Creation */}
           <div className="bg-[#2A2F3C] p-8 rounded-xl">
             <h2 className="text-2xl font-bold text-white mb-6">Create your account</h2>
@@ -71,15 +76,11 @@ const Payment = () => {
 
             <p className="text-sm text-gray-400 mt-4">
               By submitting this form you agree to our{" "}
-              <Link to="/terms-of-service" className="text-[#9b87f5] hover:underline">
+              <Link to="/terms-of-service" className="text-[#8B5CF6] hover:underline">
                 Terms of service
-              </Link>
-              ,{" "}
-              <Link to="#" className="text-[#9b87f5] hover:underline">
-                Renewal Prices
               </Link>{" "}
               and{" "}
-              <Link to="/privacy-policy" className="text-[#9b87f5] hover:underline">
+              <Link to="/privacy-policy" className="text-[#8B5CF6] hover:underline">
                 Privacy Policy
               </Link>
               .
@@ -93,56 +94,85 @@ const Payment = () => {
             <div className="bg-[#1A1F2C] p-4 rounded-lg mb-6">
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <h3 className="text-white font-medium capitalize">{plan}</h3>
+                  <h3 className="text-white font-medium">Standard Plan</h3>
                   <p className="text-gray-400">{duration} plan (${getPlanPrice()}/mo)</p>
                 </div>
                 <div className="text-white">${calculateTotal()}</div>
               </div>
 
-              <div className="bg-[#FFE4B5] text-black px-3 py-1 rounded-full inline-block">
-                Save 83% {duration === "2-year" && "+ 3 months"}
-              </div>
+              {duration === "yearly" && (
+                <div className="bg-[#8B5CF6]/20 text-[#8B5CF6] px-3 py-1 rounded-full inline-block">
+                  Save 40%
+                </div>
+              )}
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-bold text-white">Select Your Payment Method</h3>
               
               <div className="flex gap-4">
-                <Button variant="outline" className="flex-1 bg-white hover:bg-gray-100">
+                <Button
+                  variant="outline"
+                  className={`flex-1 ${
+                    paymentMethod === "card"
+                      ? "bg-white text-black hover:bg-gray-100"
+                      : "bg-transparent text-white hover:bg-white/10"
+                  }`}
+                  onClick={() => setPaymentMethod("card")}
+                >
                   <CreditCard className="mr-2" /> Card
                 </Button>
-                <Button variant="outline" className="flex-1" disabled>
-                  PayPal
+                <Button
+                  variant="outline"
+                  className={`flex-1 ${
+                    paymentMethod === "qpay"
+                      ? "bg-white text-black hover:bg-gray-100"
+                      : "bg-transparent text-white hover:bg-white/10"
+                  }`}
+                  onClick={() => setPaymentMethod("qpay")}
+                >
+                  <QrCode className="mr-2" /> QPay
                 </Button>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="text-gray-300 mb-2 block">Card Number</label>
-                  <Input 
-                    type="text"
-                    placeholder="Card number"
-                    className="bg-[#1A1F2C] border-gray-700 text-white"
-                  />
-                </div>
+              {paymentMethod === "card" ? (
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-gray-300 mb-2 block">Card Number</label>
+                    <Input 
+                      type="text"
+                      placeholder="Card number"
+                      className="bg-[#1A1F2C] border-gray-700 text-white"
+                    />
+                  </div>
 
-                <div>
-                  <label className="text-gray-300 mb-2 block">Card holder name</label>
-                  <Input 
-                    type="text"
-                    placeholder="Your name on card"
-                    className="bg-[#1A1F2C] border-gray-700 text-white"
-                  />
-                </div>
+                  <div>
+                    <label className="text-gray-300 mb-2 block">Card holder name</label>
+                    <Input 
+                      type="text"
+                      placeholder="Your name on card"
+                      className="bg-[#1A1F2C] border-gray-700 text-white"
+                    />
+                  </div>
 
-                <Button className="w-full bg-[#9b87f5] hover:bg-[#8B5CF6] text-white">
-                  Pay with Credit Card
-                </Button>
-              </div>
+                  <Button className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">
+                    Pay with Credit Card
+                  </Button>
+                </div>
+              ) : (
+                <div className="text-center space-y-4">
+                  <div className="bg-white p-8 rounded-lg mx-auto w-48 h-48 flex items-center justify-center">
+                    <QrCode className="w-full h-full text-black" />
+                  </div>
+                  <p className="text-gray-300">
+                    Scan with QPay app to complete payment
+                  </p>
+                </div>
+              )}
             </div>
 
             <p className="text-center text-sm text-gray-400 mt-4">
-              31-Day money-back guarantee
+              30-Day money-back guarantee
             </p>
           </div>
         </motion.div>
