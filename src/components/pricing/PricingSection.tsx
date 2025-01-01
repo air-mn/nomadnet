@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-type PlanDuration = "monthly" | "1-year" | "2-year" | "5-year";
+type PlanDuration = "monthly" | "1-year" | "2-year";
 type PlanType = "Standard" | "Plus" | "Max";
 
 interface Plan {
@@ -12,7 +12,6 @@ interface Plan {
   monthlyPrice: number;
   yearlyPrice: number;
   twoYearPrice: number;
-  fiveYearPrice: number;
   features: string[];
   highlighted?: boolean;
 }
@@ -24,7 +23,6 @@ const plans: Plan[] = [
     monthlyPrice: 12.95,
     yearlyPrice: 3.99,
     twoYearPrice: 2.14,
-    fiveYearPrice: 1.99,
     features: [
       "Full featured, Faster VPN",
       "One-tap Tracker Blocker"
@@ -37,7 +35,6 @@ const plans: Plan[] = [
     monthlyPrice: 15.95,
     yearlyPrice: 5.82,
     twoYearPrice: 2.96,
-    fiveYearPrice: 2.82,
     features: [
       "Strong Password Manager",
       "File encryption tool"
@@ -49,7 +46,6 @@ const plans: Plan[] = [
     monthlyPrice: 19.95,
     yearlyPrice: 7.07,
     twoYearPrice: 4.07,
-    fiveYearPrice: 3.99,
     features: [
       "Remove My Data",
       "Dark Web monitoring"
@@ -69,8 +65,6 @@ const PricingSection = () => {
         return plan.yearlyPrice;
       case "2-year":
         return plan.twoYearPrice;
-      case "5-year":
-        return plan.fiveYearPrice;
       default:
         return plan.monthlyPrice;
     }
@@ -104,13 +98,13 @@ const PricingSection = () => {
         </motion.div>
 
         <div className="flex justify-center gap-4 mb-12">
-          {["5-year", "2-year", "1-year", "monthly"].map((duration) => (
+          {["2-year", "1-year", "monthly"].map((duration) => (
             <button
               key={duration}
               onClick={() => setSelectedDuration(duration as PlanDuration)}
               className={`px-6 py-2 rounded-full transition-all ${
                 selectedDuration === duration
-                  ? "bg-[#9b87f5] text-white"
+                  ? "bg-[#8B5CF6] text-white"
                   : "bg-gray-800 text-gray-400 hover:bg-gray-700"
               }`}
             >
@@ -126,12 +120,12 @@ const PricingSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className={`relative bg-[#2A2F3C] rounded-xl overflow-hidden ${
-                plan.highlighted ? "border-2 border-[#9b87f5]" : ""
+              className={`relative bg-gradient-to-b from-[#2A2F3C] to-[#1F242F] rounded-xl overflow-hidden ${
+                plan.highlighted ? "border-2 border-[#8B5CF6]" : ""
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute top-0 left-0 right-0 bg-[#9b87f5] text-white text-center py-2">
+                <div className="absolute top-0 left-0 right-0 bg-[#8B5CF6] text-white text-center py-2">
                   Best Selling
                 </div>
               )}
@@ -139,7 +133,7 @@ const PricingSection = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
                 <p className="text-gray-400 mb-4">{plan.description}</p>
                 
-                <div className="bg-[#FFE4B5] text-black rounded-full px-4 py-1 inline-block mb-6">
+                <div className="bg-[#8B5CF6]/20 text-[#8B5CF6] rounded-full px-4 py-1 inline-block mb-6">
                   {getDiscount(plan, selectedDuration)}% off
                   {selectedDuration === "2-year" && " +3 months"}
                 </div>
@@ -158,7 +152,7 @@ const PricingSection = () => {
                   onClick={() => handlePlanSelection(plan.name)}
                   className={`w-full py-3 px-6 rounded-lg mb-4 transition-colors ${
                     plan.highlighted
-                      ? "bg-[#FFA500] hover:bg-[#FF8C00] text-white"
+                      ? "bg-[#8B5CF6] hover:bg-[#7C3AED] text-white"
                       : "bg-white hover:bg-gray-100 text-black"
                   }`}
                 >
@@ -175,7 +169,7 @@ const PricingSection = () => {
                   </p>
                   {plan.features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <Check className="w-5 h-5 text-[#9b87f5]" />
+                      <Check className="w-5 h-5 text-[#8B5CF6]" />
                       <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
