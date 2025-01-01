@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone, Globe, Server, Shield as ShieldIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import PricingSection from "@/components/pricing/PricingSection";
 
 const Index = () => {
   return (
@@ -58,7 +59,7 @@ const Index = () => {
           </div>
         </div>
       </nav>
-
+      
       {/* Hero Section with background image */}
       <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
         <div 
@@ -99,7 +100,7 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
-
+      
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[#0c0444]/10" />
@@ -146,7 +147,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-
+      
       {/* Features Section (Why Choose NomadNet?) */}
       <section id="features" className="py-20 bg-[#1A1F2C]/50">
         <div className="container">
@@ -197,7 +198,10 @@ const Index = () => {
           </div>
         </div>
       </section>
-
+      
+      {/* Pricing Section */}
+      <PricingSection />
+      
       {/* Footer */}
       <footer className="py-8 bg-[#1A1F2C] text-gray-300">
         <div className="container text-center">
