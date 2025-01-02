@@ -13,8 +13,8 @@ interface Plan {
 const plan: Plan = {
   name: "VPN",
   description: "Ultimate online privacy and security",
-  monthlyPrice: 8,
-  yearlyPrice: 5,
+  monthlyPrice: 6.99,
+  yearlyPrice: 4.99,
   features: [
     "Military-grade encryption",
     "No-logs policy for complete privacy",
