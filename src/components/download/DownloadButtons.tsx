@@ -1,4 +1,4 @@
-import { Apple, Android } from "lucide-react";
+import { Apple, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const DownloadButtons = () => {
@@ -14,7 +14,7 @@ const DownloadButtons = () => {
         size="lg"
         className="bg-primary hover:bg-secondary text-white px-8 transition-colors duration-300"
       >
-        <Android className="mr-2 h-5 w-5" /> Download for Android
+        <Smartphone className="mr-2 h-5 w-5" /> Download for Android
       </Button>
     </div>
   );
