@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const emailSchema = z.string().email();
-const passwordSchema = z.string().min(8).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+const passwordSchema = z.string().min(8); // Simplified password check, only requires 8+ characters
 
 const Payment = () => {
   const [searchParams] = useSearchParams();

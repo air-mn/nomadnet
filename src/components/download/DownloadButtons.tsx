@@ -1,4 +1,3 @@
-import { Apple, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const DownloadButtons = () => {
@@ -8,13 +7,23 @@ const DownloadButtons = () => {
         size="lg"
         className="bg-primary hover:bg-secondary text-white px-8 transition-colors duration-300"
       >
-        <Apple className="mr-2 h-5 w-5" /> Download for iOS
+        <img 
+          src="/lovable-uploads/20069d79-1c9c-45a8-aad1-fdf45f016f2b.png" 
+          alt="Apple App Store" 
+          className="mr-2 h-5 w-5"
+        /> 
+        Download for iOS
       </Button>
       <Button
         size="lg"
         className="bg-primary hover:bg-secondary text-white px-8 transition-colors duration-300"
       >
-        <Smartphone className="mr-2 h-5 w-5" /> Download for Android
+        <img 
+          src="/lovable-uploads/3d085d12-61ae-47dd-bd0f-e6fc227dc362.png" 
+          alt="Google Play Store" 
+          className="mr-2 h-5 w-5"
+        /> 
+        Download for Android
       </Button>
     </div>
   );

@@ -18,10 +18,7 @@ const plan: Plan = {
   features: [
     "Military-grade encryption",
     "No-logs policy for complete privacy",
-    "Unlimited bandwidth & server switching",
-    "Access to global content",
-    "24/7 customer support",
-    "30-day money-back guarantee"
+    "24/7 customer support"
   ]
 };
 
@@ -70,14 +67,10 @@ const PricingSection = () => {
 
                 <button
                   onClick={() => handlePlanSelection('monthly')}
-                  className="w-full py-3 px-6 rounded-lg mb-4 bg-primary hover:bg-secondary transition-colors duration-300 text-white"
+                  className="w-full py-3 px-6 rounded-lg mb-4 bg-primary hover:bg-[rgb(148,80,252)] transition-colors duration-300 text-white"
                 >
                   Get Protected Now
                 </button>
-
-                <p className="text-sm text-accent text-center mb-6">
-                  30-Day Money-Back Guarantee
-                </p>
 
                 <div className="space-y-4">
                   <p className="font-medium text-white">What's included:</p>
@@ -122,14 +115,10 @@ const PricingSection = () => {
 
                 <button
                   onClick={() => handlePlanSelection('yearly')}
-                  className="w-full py-3 px-6 rounded-lg mb-4 bg-primary hover:bg-secondary transition-colors duration-300 text-white"
+                  className="w-full py-3 px-6 rounded-lg mb-4 bg-primary hover:bg-[rgb(148,80,252)] transition-colors duration-300 text-white"
                 >
                   Get Protected Now
                 </button>
-
-                <p className="text-sm text-accent text-center mb-6">
-                  30-Day Money-Back Guarantee
-                </p>
 
                 <div className="space-y-4">
                   <p className="font-medium text-white">What's included:</p>
