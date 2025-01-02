@@ -1,66 +1,16 @@
 import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone, Globe, Server, Shield as ShieldIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Navigation from "@/components/navigation/Navigation";
+import DownloadButtons from "@/components/download/DownloadButtons";
 import PricingSection from "@/components/pricing/PricingSection";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#1A1F2C]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#1F2937] backdrop-blur-sm border-b border-[#1F2937]/30">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <img
-                src="/lovable-uploads/123.png"
-                alt="NomadNet Logo"
-                className="h-8"
-              />
-            </motion.div>
-
-            {/* Navigation Links */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="hidden md:flex items-center space-x-8"
-            >
-              <a
-                href="#features"
-                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
-              >
-                Features
-              </a>
-              <a
-                href="#how-it-works"
-                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
-              >
-                How It Works
-              </a>
-              <a
-                href="#pricing"
-                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
-              >
-                Pricing
-              </a>
-              <a
-                href="#download"
-                className="text-gray-100 hover:text-[#9b87f5] transition-colors duration-200"
-              >
-                Download
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-violet">
+      <Navigation />
       
-      {/* Hero Section with background image */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -69,7 +19,7 @@ const Index = () => {
             backgroundBlendMode: 'overlay'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c0444]/90 via-[#0c0444]/85 to-[#1A1F2C]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-violet/90 via-violet/85 to-violet" />
         <div className="container relative z-10 text-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -80,23 +30,10 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               Stay Connected to Mongolia, Wherever You Are!
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-accent max-w-3xl mx-auto">
               NomadNet - The Secure, Fast, and Reliable VPN for Foreign Mongolians
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Button
-                size="lg"
-                className="bg-[#9b87f5] hover:bg-[#8B5CF6] text-white px-8"
-              >
-                Download for iOS
-              </Button>
-              <Button
-                size="lg"
-                className="bg-[#9b87f5] hover:bg-[#8B5CF6] text-white px-8"
-              >
-                Download for Android
-              </Button>
-            </div>
+            <DownloadButtons />
           </motion.div>
         </div>
       </section>
@@ -148,8 +85,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Features Section (Why Choose NomadNet?) */}
-      <section id="features" className="py-20 bg-[#1A1F2C]/50">
+      {/* Features Section */}
+      <section id="features" className="py-20 bg-violet/50">
         <div className="container">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -203,15 +140,15 @@ const Index = () => {
       <PricingSection />
       
       {/* Footer */}
-      <footer className="py-8 bg-[#1A1F2C] text-gray-300">
+      <footer className="py-8 bg-violet text-accent">
         <div className="container text-center">
           <p className="mb-4">© 2024 NomadNet. All Rights Reserved.</p>
           <div className="flex justify-center gap-4">
-            <Link to="/privacy-policy" className="hover:text-[#9b87f5] transition-colors">
+            <Link to="/privacy-policy" className="hover:text-primary transition-colors">
               Privacy Policy
             </Link>
             <span>|</span>
-            <Link to="/terms-of-service" className="hover:text-[#9b87f5] transition-colors">
+            <Link to="/terms-of-service" className="hover:text-primary transition-colors">
               Terms of Service
             </Link>
           </div>

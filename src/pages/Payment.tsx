@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, CreditCard, QrCode, X } from "lucide-react";
+import { Eye, QrCode, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { z } from "zod";
+
+const emailSchema = z.string().email();
+const passwordSchema = z.string().min(8).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 
 const Payment = () => {
   const [searchParams] = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "qpay">("card");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [hasCheckedPayment, setHasCheckedPayment] = useState(false);
   const navigate = useNavigate();
   const duration = searchParams.get("duration") || "monthly";
 
@@ -26,8 +35,28 @@ const Payment = () => {
     return (basePrice * months).toFixed(2);
   };
 
+  const validateEmail = (email: string) => {
+    const result = emailSchema.safeParse(email);
+    setIsEmailValid(result.success);
+    return result.success;
+  };
+
+  const checkPasswordStrength = (password: string) => {
+    const result = passwordSchema.safeParse(password);
+    if (!result.success) {
+      setPasswordStrength("Weak - Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character");
+    } else {
+      setPasswordStrength("Strong");
+    }
+  };
+
+  const handleCheckPayment = () => {
+    setHasCheckedPayment(true);
+    toast.success("Payment verified successfully!");
+  };
+
   return (
-    <div className="min-h-screen bg-[#1A1F2C] py-20">
+    <div className="min-h-screen bg-violet py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,50 +66,68 @@ const Payment = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute -top-10 left-0 text-white hover:text-gray-300"
+            className="absolute -top-10 left-0 text-white hover:text-accent"
             onClick={() => navigate(-1)}
           >
             <X className="h-6 w-6" />
           </Button>
 
           {/* Left Column - Account Creation */}
-          <div className="bg-[#2A2F3C] p-8 rounded-xl">
+          <div className="bg-ebony p-8 rounded-xl">
             <h2 className="text-2xl font-bold text-white mb-6">Create your account</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="text-gray-300 mb-2 block">Your email address</label>
+                <label className="text-accent mb-2 block">Your email address</label>
                 <Input 
                   type="email" 
                   placeholder="name@example.com"
-                  className="bg-[#1A1F2C] border-gray-700 text-white"
+                  className="bg-violet border-accent text-white"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    validateEmail(e.target.value);
+                  }}
                 />
+                {!isEmailValid && email && (
+                  <p className="text-red-500 text-sm mt-1">Please enter a valid email address</p>
+                )}
               </div>
 
               <div className="relative">
-                <label className="text-gray-300 mb-2 block">Set Your Password</label>
+                <label className="text-accent mb-2 block">Set Your Password</label>
                 <Input 
                   type={showPassword ? "text" : "password"}
                   placeholder="8 characters min"
-                  className="bg-[#1A1F2C] border-gray-700 text-white pr-10"
+                  className="bg-violet border-accent text-white pr-10"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    checkPasswordStrength(e.target.value);
+                  }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-[38px] text-gray-400"
+                  className="absolute right-3 top-[38px] text-accent"
                 >
                   <Eye className="w-5 h-5" />
                 </button>
+                {passwordStrength && (
+                  <p className={`text-sm mt-1 ${passwordStrength === "Strong" ? "text-green-500" : "text-red-500"}`}>
+                    {passwordStrength}
+                  </p>
+                )}
               </div>
             </div>
 
-            <p className="text-sm text-gray-400 mt-4">
+            <p className="text-sm text-accent mt-4">
               By submitting this form you agree to our{" "}
-              <Link to="/terms-of-service" className="text-[#8B5CF6] hover:underline">
+              <Link to="/terms-of-service" className="text-primary hover:underline">
                 Terms of service
               </Link>{" "}
               and{" "}
-              <Link to="/privacy-policy" className="text-[#8B5CF6] hover:underline">
+              <Link to="/privacy-policy" className="text-primary hover:underline">
                 Privacy Policy
               </Link>
               .
@@ -88,90 +135,50 @@ const Payment = () => {
           </div>
 
           {/* Right Column - Payment Details */}
-          <div className="bg-[#2A2F3C] p-8 rounded-xl">
+          <div className="bg-ebony p-8 rounded-xl">
             <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
             
-            <div className="bg-[#1A1F2C] p-4 rounded-lg mb-6">
+            <div className="bg-violet p-4 rounded-lg mb-6">
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <h3 className="text-white font-medium">Standard Plan</h3>
-                  <p className="text-gray-400">{duration} plan (${getPlanPrice()}/mo)</p>
+                  <h3 className="text-white font-medium">
+                    {duration === "monthly" ? "Monthly" : "1 Year"} Plan
+                  </h3>
+                  <p className="text-accent">${getPlanPrice()}/mo</p>
                 </div>
                 <div className="text-white">${calculateTotal()}</div>
               </div>
 
               {duration === "yearly" && (
-                <div className="bg-[#8B5CF6]/20 text-[#8B5CF6] px-3 py-1 rounded-full inline-block">
+                <div className="bg-primary/20 text-primary px-3 py-1 rounded-full inline-block">
                   Save 40%
                 </div>
               )}
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-bold text-white">Select Your Payment Method</h3>
+              <h3 className="text-xl font-bold text-white">QPay Payment</h3>
               
-              <div className="flex gap-4">
+              <div className="text-center space-y-4">
+                <div className="bg-white p-8 rounded-lg mx-auto w-48 h-48 flex items-center justify-center">
+                  <QrCode className="w-full h-full text-violet" />
+                </div>
+                <p className="text-accent">
+                  Scan with QPay app to complete payment
+                </p>
                 <Button
-                  variant="outline"
-                  className={`flex-1 ${
-                    paymentMethod === "card"
-                      ? "bg-white text-black hover:bg-gray-100"
-                      : "bg-transparent text-white hover:bg-white/10"
-                  }`}
-                  onClick={() => setPaymentMethod("card")}
+                  className="w-full bg-primary hover:bg-secondary text-white transition-colors duration-300"
+                  onClick={handleCheckPayment}
                 >
-                  <CreditCard className="mr-2" /> Card
+                  I have completed the payment
                 </Button>
-                <Button
-                  variant="outline"
-                  className={`flex-1 ${
-                    paymentMethod === "qpay"
-                      ? "bg-white text-black hover:bg-gray-100"
-                      : "bg-transparent text-white hover:bg-white/10"
-                  }`}
-                  onClick={() => setPaymentMethod("qpay")}
-                >
-                  <QrCode className="mr-2" /> QPay
-                </Button>
+                {hasCheckedPayment && (
+                  <p className="text-green-500">Payment verified successfully!</p>
+                )}
               </div>
-
-              {paymentMethod === "card" ? (
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-gray-300 mb-2 block">Card Number</label>
-                    <Input 
-                      type="text"
-                      placeholder="Card number"
-                      className="bg-[#1A1F2C] border-gray-700 text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-gray-300 mb-2 block">Card holder name</label>
-                    <Input 
-                      type="text"
-                      placeholder="Your name on card"
-                      className="bg-[#1A1F2C] border-gray-700 text-white"
-                    />
-                  </div>
-
-                  <Button className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">
-                    Pay with Credit Card
-                  </Button>
-                </div>
-              ) : (
-                <div className="text-center space-y-4">
-                  <div className="bg-white p-8 rounded-lg mx-auto w-48 h-48 flex items-center justify-center">
-                    <QrCode className="w-full h-full text-black" />
-                  </div>
-                  <p className="text-gray-300">
-                    Scan with QPay app to complete payment
-                  </p>
-                </div>
-              )}
             </div>
 
-            <p className="text-center text-sm text-gray-400 mt-4">
+            <p className="text-center text-sm text-accent mt-4">
               30-Day money-back guarantee
             </p>
           </div>
