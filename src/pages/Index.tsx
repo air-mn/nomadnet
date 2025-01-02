@@ -28,10 +28,10 @@ const Index = () => {
             className="space-y-6"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Stay Connected to Mongolia, Wherever You Are!
+              NomadNet - Mongol VPN
             </h1>
             <p className="text-xl md:text-2xl text-accent max-w-3xl mx-auto">
-              NomadNet - The Secure, Fast, and Reliable VPN for Foreign Mongolians
+              Stay Connected to Mongolia, Wherever You Are!
             </p>
             <DownloadButtons />
           </motion.div>
