@@ -20,7 +20,7 @@ const Payment = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [hasCheckedPayment, setHasCheckedPayment] = useState(false);
   const [mntAmount, setMntAmount] = useState<number | null>(null);
-  const [passwordStrength, setPasswordStrength] = useState(""); // Added missing state
+  const [passwordStrength, setPasswordStrength] = useState("");
   const navigate = useNavigate();
   const duration = searchParams.get("duration") || "monthly";
 
@@ -71,8 +71,7 @@ const Payment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-violet py-20 bg-cover bg-center bg-no-repeat"
-         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1501854140801-50d01698950b")' }}>
+    <div className="min-h-screen bg-violet py-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,7 +116,10 @@ const Payment = () => {
                   placeholder="8 characters min"
                   className="bg-violet border-accent text-white pr-10"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    checkPasswordStrength(e.target.value);
+                  }}
                 />
                 <button
                   type="button"
@@ -127,6 +129,11 @@ const Payment = () => {
                   <Eye className="w-5 h-5" />
                 </button>
               </div>
+              {password && (
+                <p className={`text-sm mt-1 ${passwordStrength === "Strong" ? "text-green-500" : "text-red-500"}`}>
+                  {passwordStrength}
+                </p>
+              )}
             </div>
 
             <p className="text-sm text-accent mt-4">

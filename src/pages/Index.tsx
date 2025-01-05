@@ -12,13 +12,6 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url("/lovable-uploads/photo-1501854140801-50d01698950b")',
-            backgroundBlendMode: 'overlay'
-          }}
-        />
         <div className="absolute inset-0 bg-gradient-to-b from-violet/90 via-violet/85 to-violet" />
         <div className="container relative z-10 text-white text-center">
           <motion.div
@@ -39,8 +32,7 @@ const Index = () => {
       </section>
       
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#0c0444]/10" />
+      <section id="how-it-works" className="py-20 relative overflow-hidden bg-violet/50">
         <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
