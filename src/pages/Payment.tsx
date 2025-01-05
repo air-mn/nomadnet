@@ -20,6 +20,7 @@ const Payment = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [hasCheckedPayment, setHasCheckedPayment] = useState(false);
   const [mntAmount, setMntAmount] = useState<number | null>(null);
+  const [passwordStrength, setPasswordStrength] = useState(""); // Added missing state
   const navigate = useNavigate();
   const duration = searchParams.get("duration") || "monthly";
 
