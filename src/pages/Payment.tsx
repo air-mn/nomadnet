@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, QrCode, X } from "lucide-react";
@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { z } from "zod";
 
+declare const jQuery: any;
+
 const emailSchema = z.string().email();
-const passwordSchema = z.string().min(8); // Simplified password check, only requires 8+ characters
+const passwordSchema = z.string().min(8);
 
 const Payment = () => {
   const [searchParams] = useSearchParams();
@@ -16,15 +18,15 @@ const Payment = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [passwordStrength, setPasswordStrength] = useState("");
   const [hasCheckedPayment, setHasCheckedPayment] = useState(false);
+  const [mntAmount, setMntAmount] = useState<number | null>(null);
   const navigate = useNavigate();
   const duration = searchParams.get("duration") || "monthly";
 
   const getPlanPrice = () => {
     const prices = {
-      monthly: 12.95,
-      yearly: 7.77
+      monthly: 6.99,
+      yearly: 4.99
     };
     return prices[duration as keyof typeof prices];
   };
@@ -34,6 +36,23 @@ const Payment = () => {
     const months = duration === "monthly" ? 1 : 12;
     return (basePrice * months).toFixed(2);
   };
+
+  useEffect(() => {
+    jQuery.ajax({
+      url: '//monxansh.appspot.com/xansh.json?currency=USD',
+      dataType: 'json',
+      success: function(data: any[]) {
+        const usdRate = data.find(row => row.code === 'USD')?.rate_float;
+        if (usdRate) {
+          const total = parseFloat(calculateTotal());
+          setMntAmount(Math.round(total * usdRate));
+        }
+      },
+      error: function() {
+        toast.error("Could not fetch exchange rate");
+      }
+    });
+  }, [duration]);
 
   const validateEmail = (email: string) => {
     const result = emailSchema.safeParse(email);
@@ -50,13 +69,9 @@ const Payment = () => {
     }
   };
 
-  const handleCheckPayment = () => {
-    setHasCheckedPayment(true);
-    toast.success("Payment verified successfully!");
-  };
-
   return (
-    <div className="min-h-screen bg-violet py-20">
+    <div className="min-h-screen bg-violet py-20 bg-cover bg-center bg-no-repeat"
+         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1501854140801-50d01698950b")' }}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +88,7 @@ const Payment = () => {
           </Button>
 
           {/* Left Column - Account Creation */}
-          <div className="bg-ebony p-8 rounded-xl">
+          <div className="bg-ebony/90 backdrop-blur-sm p-8 rounded-xl">
             <h2 className="text-2xl font-bold text-white mb-6">Create your account</h2>
             
             <div className="space-y-4">
@@ -86,7 +101,7 @@ const Payment = () => {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    validateEmail(e.target.value);
+                    setIsEmailValid(emailSchema.safeParse(e.target.value).success);
                   }}
                 />
                 {!isEmailValid && email && (
@@ -101,10 +116,7 @@ const Payment = () => {
                   placeholder="8 characters min"
                   className="bg-violet border-accent text-white pr-10"
                   value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    checkPasswordStrength(e.target.value);
-                  }}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
@@ -113,11 +125,6 @@ const Payment = () => {
                 >
                   <Eye className="w-5 h-5" />
                 </button>
-                {passwordStrength && (
-                  <p className={`text-sm mt-1 ${passwordStrength === "Strong" ? "text-green-500" : "text-red-500"}`}>
-                    {passwordStrength}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -135,10 +142,10 @@ const Payment = () => {
           </div>
 
           {/* Right Column - Payment Details */}
-          <div className="bg-ebony p-8 rounded-xl">
+          <div className="bg-ebony/90 backdrop-blur-sm p-8 rounded-xl">
             <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
             
-            <div className="bg-violet p-4 rounded-lg mb-6">
+            <div className="bg-violet/50 backdrop-blur-sm p-4 rounded-lg mb-6">
               <div className="flex justify-between items-center mb-4">
                 <div>
                   <h3 className="text-white font-medium">
@@ -146,7 +153,14 @@ const Payment = () => {
                   </h3>
                   <p className="text-accent">${getPlanPrice()}/mo</p>
                 </div>
-                <div className="text-white">${calculateTotal()}</div>
+                <div className="text-white">
+                  ${calculateTotal()}
+                  {mntAmount && (
+                    <div className="text-sm text-accent">
+                      ≈ {mntAmount.toLocaleString()} ₮
+                    </div>
+                  )}
+                </div>
               </div>
 
               {duration === "yearly" && (
@@ -168,7 +182,10 @@ const Payment = () => {
                 </p>
                 <Button
                   className="w-full bg-primary hover:bg-secondary text-white transition-colors duration-300"
-                  onClick={handleCheckPayment}
+                  onClick={() => {
+                    setHasCheckedPayment(true);
+                    toast.success("Payment verified successfully!");
+                  }}
                 >
                   I have completed the payment
                 </Button>
