@@ -8,6 +8,17 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Add historyApiFallback to handle client-side routing
+    proxy: {
+      "/privacy-policy": {
+        target: "http://localhost:8080",
+        rewrite: () => "/index.html",
+      },
+      "/terms-of-service": {
+        target: "http://localhost:8080",
+        rewrite: () => "/index.html",
+      },
+    },
   },
   plugins: [
     react(),
