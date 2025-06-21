@@ -89,15 +89,15 @@
     width: 100%;
     height: 100%;
     background-image: 
-      url("https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=2000&q=80"),
+      url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80"),
       url("https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=2000&q=80");
     background-size: cover, cover;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
     background-blend-mode: overlay, multiply;
-    opacity: 0.1;
+    opacity: 0.3;
     z-index: -2;
-    animation: backgroundSlide 20s ease-in-out infinite alternate;
+    animation: backgroundSlide 25s ease-in-out infinite alternate;
   }
 
   body::after {
@@ -108,9 +108,9 @@
     width: 100%;
     height: 100%;
     background: 
-      radial-gradient(circle at 20% 80%, rgba(155, 135, 245, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-      linear-gradient(45deg, transparent 30%, rgba(155, 135, 245, 0.05) 70%);
+      radial-gradient(circle at 20% 80%, rgba(155, 135, 245, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.25) 0%, transparent 50%),
+      linear-gradient(45deg, transparent 30%, rgba(155, 135, 245, 0.15) 70%);
     z-index: -1;
     animation: glowPulse 8s ease-in-out infinite;
   }
@@ -127,35 +127,74 @@
   }
 
   @keyframes glowPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
   }
 }
 
-/* VPN themed patterns */
+/* Enhanced VPN themed patterns */
 .vpn-pattern {
   background-image: 
-    radial-gradient(circle at 25px 25px, rgba(155, 135, 245, 0.2) 2px, transparent 2px),
-    radial-gradient(circle at 75px 75px, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
-  background-size: 100px 100px, 50px 50px;
+    radial-gradient(circle at 25px 25px, rgba(155, 135, 245, 0.4) 2px, transparent 2px),
+    radial-gradient(circle at 75px 75px, rgba(139, 92, 246, 0.3) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(155, 135, 245, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%);
+  background-size: 100px 100px, 50px 50px, 20px 20px, 20px 20px;
   animation: patternMove 30s linear infinite;
 }
 
 @keyframes patternMove {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 100px 100px, 50px 50px; }
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 100px 100px, 50px 50px, 20px 20px, 20px 20px; }
 }
 
-/* Security grid overlay */
+/* Enhanced security grid overlay */
 .security-grid {
   background-image: 
-    linear-gradient(rgba(155, 135, 245, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(155, 135, 245, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(rgba(155, 135, 245, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(155, 135, 245, 0.3) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%);
+  background-size: 50px 50px, 50px 50px, 30px 30px;
   animation: gridPulse 4s ease-in-out infinite;
 }
 
 @keyframes gridPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* Network connection lines */
+.network-lines {
+  background-image: 
+    linear-gradient(45deg, rgba(155, 135, 245, 0.2) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(139, 92, 246, 0.2) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: networkPulse 6s ease-in-out infinite;
+}
+
+@keyframes networkPulse {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+/* Circuit board pattern */
+.circuit-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(155, 135, 245, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.3) 2px, transparent 3px),
+    linear-gradient(0deg, rgba(155, 135, 245, 0.1) 50%, transparent 50%),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.1) 50%, transparent 50%);
+  background-size: 60px 60px, 60px 60px, 30px 30px, 30px 30px;
+  animation: circuitFlow 20s linear infinite;
+}
+
+@keyframes circuitFlow {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 60px 60px, -60px -60px, 30px 30px, -30px -30px; }
 }
