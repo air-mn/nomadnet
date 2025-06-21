@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone, Globe, Server, Shield as ShieldIcon } from "lucide-react";
 import Navigation from "@/components/navigation/Navigation";
@@ -8,11 +7,12 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen bg-violet">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32 overflow-hidden">        
+      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-violet/90 via-violet/85 to-violet" />
         <div className="container relative z-10 text-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -32,7 +32,7 @@ const Index = () => {
       </section>
       
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 relative overflow-hidden">
+      <section id="how-it-works" className="py-20 relative overflow-hidden bg-violet/50">
         <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -78,8 +78,8 @@ const Index = () => {
       </section>
       
       {/* Features Section */}
-      <section id="features" className="py-20 relative overflow-hidden">
-        <div className="container relative z-10">
+      <section id="features" className="py-20 bg-violet/50">
+        <div className="container">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
