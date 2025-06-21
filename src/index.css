@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,14 +84,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=2000&q=80");
+    background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.15;
+    opacity: 0.08;
     z-index: -2;
-    filter: blur(1px);
+    filter: blur(2px);
   }
 
   body::after {
@@ -100,7 +101,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #0b0b3e/90 0%, #1a1f3a/85 25%, #2a1f3a/80 50%, #3a2f4a/85 75%, #9b87f5/90 100%);
+    background: linear-gradient(135deg, #0b0b3e/95 0%, #1a1f3a/90 25%, #2a1f3a/85 50%, #3a2f4a/90 75%, #9b87f5/95 100%);
     z-index: -1;
   }
 }
