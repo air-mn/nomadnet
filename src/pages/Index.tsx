@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone, Globe, Server, Shield as ShieldIcon } from "lucide-react";
 import Navigation from "@/components/navigation/Navigation";
@@ -10,33 +11,8 @@ const Index = () => {
     <div className="min-h-screen relative">
       <Navigation />
       
-      {/* Hero Section with Enhanced VPN Background */}
-      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32 overflow-hidden">
-        {/* Primary VPN/Tech Background Images - More Visible */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-40"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80')",
-              backgroundBlendMode: "overlay"
-            }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-30"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=2000&q=80')",
-              backgroundBlendMode: "multiply"
-            }}
-          />
-        </div>
-        
-        {/* Enhanced animated overlay patterns */}
-        <div className="absolute inset-0 vpn-pattern opacity-60" />
-        <div className="absolute inset-0 network-lines opacity-50" />
-        
-        {/* Reduced gradient overlay to show more background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-violet/80 via-violet/70 to-violet/80 z-1" />
-        
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32 overflow-hidden">        
         <div className="container relative z-10 text-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -55,27 +31,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* How It Works Section with Enhanced Laptop Background */}
+      {/* How It Works Section */}
       <section id="how-it-works" className="py-20 relative overflow-hidden">
-        {/* Laptop/Programming Background - More Visible */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-35"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=2000&q=80')",
-            }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-25"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=80')",
-            }}
-          />
-        </div>
-        
-        <div className="absolute inset-0 security-grid opacity-70" />
-        <div className="absolute inset-0 bg-violet/75 z-1" />
-        
         <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -120,27 +77,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Features Section with Enhanced Code Background */}
+      {/* Features Section */}
       <section id="features" className="py-20 relative overflow-hidden">
-        {/* Programming/Security Background - More Visible */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-40"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=2000&q=80')",
-            }}
-          />
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-30"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=2000&q=80')",
-            }}
-          />
-        </div>
-        
-        <div className="absolute inset-0 circuit-pattern opacity-60" />
-        <div className="absolute inset-0 bg-violet/70 z-1" />
-        
         <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
