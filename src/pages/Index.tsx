@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Shield, Zap, Lock, Smartphone, Globe, Server, Shield as ShieldIcon } from "lucide-react";
 import Navigation from "@/components/navigation/Navigation";
@@ -7,12 +8,36 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-violet">
+    <div className="min-h-screen relative">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-violet/90 via-violet/85 to-violet" />
+      {/* Hero Section with VPN Background */}
+      <section className="relative min-h-screen flex items-center justify-center py-20 pt-32 overflow-hidden">
+        {/* Tech Background Images */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=2000&q=80')",
+              backgroundBlendMode: "multiply"
+            }}
+          />
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-15"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=80')",
+              backgroundBlendMode: "overlay"
+            }}
+          />
+        </div>
+        
+        {/* Animated overlay patterns */}
+        <div className="absolute inset-0 vpn-pattern opacity-30" />
+        <div className="absolute inset-0 security-grid opacity-40" />
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-violet/95 via-violet/90 to-violet/95 z-1" />
+        
         <div className="container relative z-10 text-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -31,8 +56,20 @@ const Index = () => {
         </div>
       </section>
       
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 relative overflow-hidden bg-violet/50">
+      {/* How It Works Section with Laptop Background */}
+      <section id="how-it-works" className="py-20 relative overflow-hidden">
+        {/* Laptop/Tech Background */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=2000&q=80')",
+            }}
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-violet/90 z-1" />
+        
         <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -77,9 +114,21 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-violet/50">
-        <div className="container">
+      {/* Features Section with Code Background */}
+      <section id="features" className="py-20 relative overflow-hidden">
+        {/* Programming/Security Background */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-15"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=2000&q=80')",
+            }}
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-violet/85 z-1" />
+        
+        <div className="container relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
